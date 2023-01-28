@@ -1,0 +1,68 @@
+@font-face {
+  font-family: Poppins;
+  src: url(assets/font/Poppins-Regular.ttf);
+}
+
+*, html, body {
+  font-family: Poppins;
+  background-color: #2e2e2e;
+  color: #fff;
+} 
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+}
+
+.buttons > * {
+  font-size: 1.3rem;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: 150ms ease-in;
+  transform-origin: left;
+}
+
+.buttons .rock-btn {
+  border: 1px solid #46FF90;
+  color: #46FF90;
+}
+
+.buttons .rock-btn:hover {
+  cursor: pointer;
+  border: 1px solid #2e2e2e;
+  background-color: #46FF90;
+  color: #2e2e2e;
+}
+
+.buttons .paper-btn {
+  border: 1px solid #44BDFF;
+  color: #44BDFF;
+}
+
+.buttons .paper-btn:hover {
+  cursor: pointer;
+  border: 1px solid #2e2e2e;
+  background-color: #44BDFF;
+  color: #2e2e2e;
+}
+
+.buttons .scissor-btn {
+  border: 1px solid #FF4444;
+  color: #FF4444;
+}
+
+.buttons .scissor-btn:hover {
+  cursor: pointer;
+  border: 1px solid #2e2e2e;
+  background-color: #FF4444;
+  color: #2e2e2e;
+}
+
