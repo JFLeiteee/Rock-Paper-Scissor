@@ -66,3 +66,12 @@ main {
   color: #2e2e2e;
 }
 
+.user-result {
+  margin-left: 5rem;
+  align-self: flex-start;
+  max-width: 231px;
+}
+
+.disabled {
+  display: none;
+}

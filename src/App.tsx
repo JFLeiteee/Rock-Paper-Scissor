@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import RockHand from './assets/img/ROCK.png';
+import PaperHand from './assets/img/PAPER.png';
+import ScissorHand from './assets/img/SCISSOR.png';
 
 function App() {
   const [selected, setSelected] = useState<string>("");
@@ -9,18 +12,18 @@ function App() {
   useEffect(() => {
     setRandom(makeChoice());
     setResult(Game(random, selected));
-  }, [random, selected]);
+  }, [selected]);
 
   function makeChoice(): string {
   let sorted = Math.floor(Math.random() * 3);
   if (sorted == 0) {
-    return 'Rock';
+    return 'Rock'
   }
   else if (sorted == 1) {
-    return 'Paper';
+    return 'Paper'
   }
   else {
-    return 'Scissor';
+    return 'Scissor'
   }
 }
 
@@ -33,23 +36,34 @@ function Game(random: string, selected: string) {
   else{
     // TIE CONDITION
     if(random === selected){
-      alert('tie');
+      console.log('tie');
       return 'tie';
     }
     // WIN CONDITION
     else if(selected === 'Rock' && random === 'Scissor' || 
     selected === 'Scissor' && random === 'Paper' ||
     selected === 'Paper' && random === 'Rock') {
-      alert('win');
+      console.log('win');
       return 'win';
     }
     // LOSE CONDITION
     else if (selected === 'Rock' && random === 'Paper' ||
     selected === 'Paper' && random === 'Scissor' ||
     selected === 'Scissor' && random === 'Rock') {
-      alert('lose');
+      console.log('lose');
       return 'lose';
     }
+  }
+}
+
+// APARECER A IMAGEM QUADO O USUARIO CLICAR
+function appearSelected(selected:string) {
+  const rockImg = document.querySelector(".rock-img")
+  const paperImg = document.querySelector(".paper-img")
+  const scissorImg = document.querySelector(".scissor-img")
+
+  if(selected === 'Rock'){
+    rockImg.classList.remove("disabled");
   }
 }
 
@@ -63,6 +77,15 @@ function Game(random: string, selected: string) {
         <button className='paper-btn'value='1' onClick={() => { setSelected('Paper')}}>Paper</button>
         <button className='scissor-btn' value='2' onClick={() => { setSelected('Scissor')}}>Scissor</button>
       </div>
+
+      <div className='user-result'>
+        <img src={RockHand} alt="ROCK HAND" className='rock-img disabled'/>
+        <img src={PaperHand} alt="PAPER HAND" className='paper-img disabled' />
+        <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
+      </div>
+
+      {/* <div className='pc-result'>
+      </div> */}
     </main>
   )
 }
