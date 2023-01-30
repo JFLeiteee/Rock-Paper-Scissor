@@ -12,17 +12,32 @@ function App() {
   useEffect(() => {
     setRandom(makeChoice());
     setResult(Game(random, selected));
+    appearSelected(selected);
   }, [selected]);
 
-  function makeChoice(): string {
+function makeChoice(): string {
+  const rockImg = document.querySelector(".pc-rock-img")
+  const paperImg = document.querySelector(".pc-paper-img")
+  const scissorImg = document.querySelector(".pc-scissor-img")
+
   let sorted = Math.floor(Math.random() * 3);
+
   if (sorted == 0) {
+    rockImg.classList.remove("disabled");
+    paperImg.classList.add("disabled");
+    scissorImg.classList.add("disabled");
     return 'Rock'
   }
   else if (sorted == 1) {
+    paperImg.classList.remove("disabled");
+    rockImg.classList.add("disabled");
+    scissorImg.classList.add("disabled");
     return 'Paper'
   }
   else {
+    scissorImg.classList.remove("disabled");
+    paperImg.classList.add("disabled");
+    rockImg.classList.add("disabled");
     return 'Scissor'
   }
 }
@@ -62,8 +77,20 @@ function appearSelected(selected:string) {
   const paperImg = document.querySelector(".paper-img")
   const scissorImg = document.querySelector(".scissor-img")
 
-  if(selected === 'Rock'){
+  if(selected == 'Rock'){
     rockImg.classList.remove("disabled");
+    paperImg.classList.add("disabled");
+    scissorImg.classList.add("disabled");
+  }
+  else if (selected == 'Paper') {
+    paperImg.classList.remove("disabled");
+    rockImg.classList.add("disabled");
+    scissorImg.classList.add("disabled");
+  }
+  else if (selected == 'Scissor') {
+    scissorImg.classList.remove("disabled");
+    paperImg.classList.add("disabled");
+    rockImg.classList.add("disabled");
   }
 }
 
@@ -78,14 +105,19 @@ function appearSelected(selected:string) {
         <button className='scissor-btn' value='2' onClick={() => { setSelected('Scissor')}}>Scissor</button>
       </div>
 
-      <div className='user-result'>
-        <img src={RockHand} alt="ROCK HAND" className='rock-img disabled'/>
-        <img src={PaperHand} alt="PAPER HAND" className='paper-img disabled' />
-        <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
-      </div>
+      <div className='results'>
+        <div className='user-result'>
+          <img src={RockHand} alt="ROCK HAND" className='rock-img disabled'/>
+          <img src={PaperHand} alt="PAPER HAND" className='paper-img disabled' />
+          <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
+        </div>
 
-      {/* <div className='pc-result'>
-      </div> */}
+        <div className='pc-result'>
+          <img src={RockHand} alt="ROCK HAND" className='-pc-rock-img disabled'/>
+          <img src={PaperHand} alt="PAPER HAND" className='pc-paper-img disabled' />
+          <img src={ScissorHand} alt="SCISSOR HAND" className='pc-scissor-img disabled'/>
+        </div>
+      </div>
     </main>
   )
 }
