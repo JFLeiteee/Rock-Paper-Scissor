@@ -16,56 +16,71 @@ function App() {
   }, [selected]);
 
 function makeChoice(): string {
-  const rockImg = document.querySelector(".pc-rock-img")
-  const paperImg = document.querySelector(".pc-paper-img")
-  const scissorImg = document.querySelector(".pc-scissor-img")
-
   let sorted = Math.floor(Math.random() * 3);
 
   if (sorted == 0) {
-    rockImg.classList.remove("disabled");
-    paperImg.classList.add("disabled");
-    scissorImg.classList.add("disabled");
     return 'Rock'
   }
   else if (sorted == 1) {
-    paperImg.classList.remove("disabled");
-    rockImg.classList.add("disabled");
-    scissorImg.classList.add("disabled");
     return 'Paper'
   }
   else {
-    scissorImg.classList.remove("disabled");
-    paperImg.classList.add("disabled");
-    rockImg.classList.add("disabled");
     return 'Scissor'
   }
 }
 
+function appearPcResult(random:string) {
+  const RockImg = document.querySelector(".pc-rock-img");
+  const PaperImg = document.querySelector(".pc-paper-img");
+  const ScissorImg = document.querySelector(".pc-scissor-img");
+
+  if(random === 'Rock'){
+    RockImg?.classList.remove("disabled");
+    PaperImg?.classList.add("disabled");
+    ScissorImg?.classList.add("disabled");
+  }
+  else if(random === 'Paper'){
+    PaperImg?.classList.remove("disabled");
+    RockImg?.classList.add("disabled");
+    ScissorImg?.classList.add("disabled");
+  }
+  else if (random === 'Scissor'){
+    ScissorImg?.classList.remove("disabled");
+    PaperImg?.classList.add("disabled");
+    RockImg?.classList.add("disabled");
+  }
+}
+
 function Game(random: string, selected: string) {
+  let result: string;
 
   if(random == '' || selected == '') {
     return '';
   }
 
   else{
+    appearPcResult(random);
+
     // TIE CONDITION
     if(random === selected){
-      console.log('tie');
+      result = 'tie';
+      console.log(result);
       return 'tie';
     }
     // WIN CONDITION
     else if(selected === 'Rock' && random === 'Scissor' || 
     selected === 'Scissor' && random === 'Paper' ||
     selected === 'Paper' && random === 'Rock') {
-      console.log('win');
+      result = 'win'
+      console.log(result);
       return 'win';
     }
     // LOSE CONDITION
     else if (selected === 'Rock' && random === 'Paper' ||
     selected === 'Paper' && random === 'Scissor' ||
     selected === 'Scissor' && random === 'Rock') {
-      console.log('lose');
+      result = 'lose';
+      console.log(result);
       return 'lose';
     }
   }
@@ -78,19 +93,19 @@ function appearSelected(selected:string) {
   const scissorImg = document.querySelector(".scissor-img")
 
   if(selected == 'Rock'){
-    rockImg.classList.remove("disabled");
-    paperImg.classList.add("disabled");
-    scissorImg.classList.add("disabled");
+    rockImg?.classList.remove("disabled");
+    paperImg?.classList.add("disabled");
+    scissorImg?.classList.add("disabled");
   }
   else if (selected == 'Paper') {
-    paperImg.classList.remove("disabled");
-    rockImg.classList.add("disabled");
-    scissorImg.classList.add("disabled");
+    paperImg?.classList.remove("disabled");
+    rockImg?.classList.add("disabled");
+    scissorImg?.classList.add("disabled");
   }
   else if (selected == 'Scissor') {
-    scissorImg.classList.remove("disabled");
-    paperImg.classList.add("disabled");
-    rockImg.classList.add("disabled");
+    scissorImg?.classList.remove("disabled");
+    paperImg?.classList.add("disabled");
+    rockImg?.classList.add("disabled");
   }
 }
 
@@ -112,8 +127,13 @@ function appearSelected(selected:string) {
           <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
         </div>
 
+        <div className='game-result'>
+          <h4>You...</h4>
+          <h2>{result.toUpperCase()}</h2>
+        </div>
+
         <div className='pc-result'>
-          <img src={RockHand} alt="ROCK HAND" className='-pc-rock-img disabled'/>
+          <img src={RockHand} alt="ROCK HAND" className='pc-rock-img disabled'/>
           <img src={PaperHand} alt="PAPER HAND" className='pc-paper-img disabled' />
           <img src={ScissorHand} alt="SCISSOR HAND" className='pc-scissor-img disabled'/>
         </div>
