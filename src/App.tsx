@@ -7,7 +7,17 @@ import ScissorHand from './assets/img/SCISSOR.png';
 function App() {
   const [selected, setSelected] = useState<string>("");
   const [random, setRandom] = useState<string>("")
-  const [result, setResult] = useState<string>("")
+  const [result, setResult] = useState("")
+  const [isNewGame, setIsNewGame] = useState<boolean>(true)
+  const [points, setPoints] = useState(0)
+
+  const rockImg = document.querySelector(".rock-img")
+  const paperImg = document.querySelector(".paper-img")
+  const scissorImg = document.querySelector(".scissor-img")
+
+  const RockImg = document.querySelector(".pc-rock-img");
+  const PaperImg = document.querySelector(".pc-paper-img");
+  const ScissorImg = document.querySelector(".pc-scissor-img");
 
   useEffect(() => {
     setRandom(makeChoice());
@@ -30,10 +40,6 @@ function makeChoice(): string {
 }
 
 function appearPcResult(random:string) {
-  const RockImg = document.querySelector(".pc-rock-img");
-  const PaperImg = document.querySelector(".pc-paper-img");
-  const ScissorImg = document.querySelector(".pc-scissor-img");
-
   if(random === 'Rock'){
     RockImg?.classList.remove("disabled");
     PaperImg?.classList.add("disabled");
@@ -54,7 +60,7 @@ function appearPcResult(random:string) {
 function Game(random: string, selected: string) {
   let result: string;
 
-  if(random == '' || selected == '') {
+  if(random === "" || selected === "") {
     return '';
   }
 
@@ -63,35 +69,33 @@ function Game(random: string, selected: string) {
 
     // TIE CONDITION
     if(random === selected){
-      result = 'tie';
+      result = 'tied';
       console.log(result);
-      return 'tie';
+      return 'tied';
     }
     // WIN CONDITION
     else if(selected === 'Rock' && random === 'Scissor' || 
     selected === 'Scissor' && random === 'Paper' ||
     selected === 'Paper' && random === 'Rock') {
-      result = 'win'
+      result = 'won'
       console.log(result);
-      return 'win';
+      setPoints(points => points + 1);
+      return 'won';
     }
     // LOSE CONDITION
     else if (selected === 'Rock' && random === 'Paper' ||
     selected === 'Paper' && random === 'Scissor' ||
     selected === 'Scissor' && random === 'Rock') {
-      result = 'lose';
+      result = 'lost';
       console.log(result);
-      return 'lose';
+      setPoints(0)
+      return 'lost';
     }
   }
 }
 
 // APARECER A IMAGEM QUADO O USUARIO CLICAR
 function appearSelected(selected:string) {
-  const rockImg = document.querySelector(".rock-img")
-  const paperImg = document.querySelector(".paper-img")
-  const scissorImg = document.querySelector(".scissor-img")
-
   if(selected == 'Rock'){
     rockImg?.classList.remove("disabled");
     paperImg?.classList.add("disabled");
@@ -109,16 +113,43 @@ function appearSelected(selected:string) {
   }
 }
 
+function handleNewGame() {
+  setIsNewGame(isNewGame => !isNewGame)
+
+  if(isNewGame === false) {
+    setResult("")
+    setSelected("")
+    paperImg?.classList.add("disabled");
+    scissorImg?.classList.add("disabled");
+    rockImg?.classList.add("disabled");
+
+    PaperImg?.classList.add("disabled");
+    ScissorImg?.classList.add("disabled");
+    RockImg?.classList.add("disabled");
+
+  } else {
+    console.log("result: " + result)
+  }
+}
+
   return (
     <main>
-      <h1>Rock, Paper, Scissor!</h1>
-      <p>Make your choice:</p>
+      <h1 className="title">Rock, Paper, Scissor!</h1>
 
-      <div className='buttons'>
-        <button className='rock-btn' value='0' onClick={() => { setSelected('Rock')}}>Rock</button>
-        <button className='paper-btn'value='1' onClick={() => { setSelected('Paper')}}>Paper</button>
-        <button className='scissor-btn' value='2' onClick={() => { setSelected('Scissor')}}>Scissor</button>
-      </div>
+      {
+        isNewGame 
+        ? 
+        <>
+          <p>Make your choice:</p>
+          <div className='buttons'> 
+            <button className='rock-btn' value='0' onClick={() => { setSelected('Rock'), handleNewGame()}}>Rock</button>
+            <button className='paper-btn'value='1' onClick={() => { setSelected('Paper'), handleNewGame()}}>Paper</button>
+            <button className='scissor-btn' value='2' onClick={() => { setSelected('Scissor'), handleNewGame()}}>Scissor</button>
+          </div>        
+        </>
+
+        : null
+      }
 
       <div className='results'>
         <div className='user-result'>
@@ -127,10 +158,16 @@ function appearSelected(selected:string) {
           <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
         </div>
 
-        <div className='game-result'>
-          <h4>You...</h4>
-          <h2>{result.toUpperCase()}</h2>
-        </div>
+        {
+          result
+           ? <div className='game-result'>
+              <h4>You...</h4>
+              <h2 className='result'>{result.toUpperCase()}</h2>
+              <div className="points"><p>{points}</p></div>
+              <p className='play-again' onClick={() => handleNewGame()}>Play again?</p>
+            </div>
+          : null
+        }
 
         <div className='pc-result'>
           <img src={RockHand} alt="ROCK HAND" className='pc-rock-img disabled'/>

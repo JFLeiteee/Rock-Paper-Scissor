@@ -16,6 +16,22 @@ main {
   place-items: center;
 }
 
+body {
+  max-width: 98.6vw;
+  max-height: 97vh;
+}
+
+body p {
+  font-size: 2.5vmin;
+}
+
+.title {
+  font-size: 4.5vmin;
+  max-width: 100%;
+  min-width: 40%;
+  text-align: center;
+}
+
 .buttons {
   display: flex;
   flex-direction: row;
@@ -23,7 +39,7 @@ main {
 }
 
 .buttons > * {
-  font-size: 1.3rem;
+  font-size: 2.8vmin;
   border-radius: 10px;
   background-color: transparent;
   transition: 150ms ease-in;
@@ -67,20 +83,24 @@ main {
 }
 
 .results {
-  display: flex;
-  gap: 10rem;
+  display: grid;
+  max-width: 80rem;
+  min-width: 40rem;
+  place-items: center;
+  justify-content: center;
+  grid-template-columns: 20rem 15rem 20rem;
+  gap: 4rem;
   margin-top: 3rem;
 }
 
-.user-result {
-  margin-left: 5rem;
-  align-self: flex-start;
-  max-width: 231px;
+.user-result{
+  max-width: 20rem;
+  min-width: 8rem;
 }
 
-.pc-result {
-  margin-right: 5rem;
-  max-width: 231px;
+.pc-result{
+  max-width: 20rem;
+  min-width: 8rem;
 }
 
 .game-result {
@@ -88,11 +108,45 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 10rem;
+  max-width: 10rem;
 }
 
 .disabled {
   display: none;
+}
+
+.result {
+  font-size: 4.2vmin;
+}
+
+.points {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.points p {
+  margin: 0;
+  background-color: transparent;
+}
+
+.play-again {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 425px)  {
+    html, body {
+      max-width: 425px;
+      background-color: red;
+    }
+
+    .results {
+      max-width: 425px;
+    }
 }
 
 
