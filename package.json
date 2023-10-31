@@ -1,7 +1,6 @@
 {
   "name": "rockpaperscissor",
   "private": true,
-  "homepage": "https://github.com/JFLeiteee/Rock-Paper-Scissor",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -9,6 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "homepage": "./",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
