@@ -1,6 +1,7 @@
 {
   "name": "rockpaperscissor",
   "private": true,
+  "homepage": "https://rock-paper-scissor-henna.vercel.app",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
