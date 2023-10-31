@@ -150,9 +150,9 @@ function handleNewGame() {
 
       <div className='results'>
         <div className='user-result'>
-          <img src={RockHand} alt="ROCK HAND" className='rock-img disabled'/>
-          <img src={PaperHand} alt="PAPER HAND" className='paper-img disabled' />
-          <img src={ScissorHand} alt="SCISSOR HAND" className='scissor-img disabled'/>
+          <img src={RockHand} alt="ROCK HAND" className='img rock-img disabled'/>
+          <img src={PaperHand} alt="PAPER HAND" className='img paper-img disabled' />
+          <img src={ScissorHand} alt="SCISSOR HAND" className='img scissor-img disabled'/>
         </div>
 
         {
@@ -167,9 +167,9 @@ function handleNewGame() {
         }
 
         <div className='pc-result'>
-          <img src={RockHand} alt="ROCK HAND" className='pc-rock-img disabled'/>
-          <img src={PaperHand} alt="PAPER HAND" className='pc-paper-img disabled' />
-          <img src={ScissorHand} alt="SCISSOR HAND" className='pc-scissor-img disabled'/>
+          <img src={RockHand} alt="ROCK HAND" className='img pc-rock-img disabled'/>
+          <img src={PaperHand} alt="PAPER HAND" className='img pc-paper-img disabled' />
+          <img src={ScissorHand} alt="SCISSOR HAND" className='img pc-scissor-img disabled'/>
         </div>
       </div>
     </main>
