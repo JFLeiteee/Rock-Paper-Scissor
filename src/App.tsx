@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import RockHand from './assets/img/ROCK.png';
-import PaperHand from './assets/img/PAPER.png';
-import ScissorHand from './assets/img/SCISSOR.png';
+import RockHand from "./assets/ROCK.png"
+import PaperHand from "./assets/PAPER.png"
+import ScissorHand from "./assets/SCISSOR.png"
 
 function App() {
   const [selected, setSelected] = useState<string>("");
   const [random, setRandom] = useState<string>("")
-  const [result, setResult] = useState("")
+  const [result, setResult] = useState<string | undefined>("")
   const [isNewGame, setIsNewGame] = useState<boolean>(true)
   const [points, setPoints] = useState(0)
 
@@ -70,7 +70,6 @@ function Game(random: string, selected: string) {
     // TIE CONDITION
     if(random === selected){
       result = 'tied';
-      console.log(result);
       return 'tied';
     }
     // WIN CONDITION
@@ -78,7 +77,6 @@ function Game(random: string, selected: string) {
     selected === 'Scissor' && random === 'Paper' ||
     selected === 'Paper' && random === 'Rock') {
       result = 'won'
-      console.log(result);
       setPoints(points => points + 1);
       return 'won';
     }
@@ -87,7 +85,6 @@ function Game(random: string, selected: string) {
     selected === 'Paper' && random === 'Scissor' ||
     selected === 'Scissor' && random === 'Rock') {
       result = 'lost';
-      console.log(result);
       setPoints(0)
       return 'lost';
     }
@@ -128,7 +125,7 @@ function handleNewGame() {
     RockImg?.classList.add("disabled");
 
   } else {
-    console.log("result: " + result)
+    null
   }
 }
 

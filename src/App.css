@@ -141,7 +141,7 @@ body p {
 @media only screen and (max-width: 425px)  {
     html, body {
       max-width: 425px;
-      background-color: red;
+      /* background-color: red; */
     }
 
     .results {
